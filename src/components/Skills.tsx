@@ -1,16 +1,16 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const skills = [
   { name: 'React', level: 90 },
-  { name: 'TypeScript', level: 85 },
-  { name: 'Node.js', level: 80 },
-  { name: 'Nest.js', level: 75 },
-  { name: 'PostgreSQL', level: 85 },
-  { name: 'MongoDB', level: 70 },
+  { name: 'Next.js', level: 65 },
+  { name: 'Vue', level: 60 },
+  { name: 'TypeScript', level: 80},
+  { name: 'Node.js', level: 70 },
+  { name: 'Nest.js', level: 70 },
+  { name: 'PostgreSQL', level: 60 },
+  { name: 'MongoDB', level: 50 },
   { name: 'Docker', level: 75 },
-  { name: 'AWS', level: 65 },
 ];
 
 const Skills = () => {

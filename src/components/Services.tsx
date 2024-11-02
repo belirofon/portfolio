@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, GitBranch, Terminal, Database } from 'lucide-react';
@@ -7,17 +6,17 @@ const services = [
   {
     icon: <Code className="w-8 h-8" />,
     title: 'Веб-разработка',
-    description: 'Создание современных веб-приложений с использованием React и TypeScript',
+    description: 'Создание современных веб-приложений с использованием React/Next.js/Vue и TypeScript',
   },
   {
     icon: <Terminal className="w-8 h-8" />,
     title: 'Backend Разработка',
-    description: 'Разработка серверной части на Node.js и Nest.js с микросервисной архитектурой',
+    description: 'Разработка серверной части на Node.js и Nest.js',
   },
   {
     icon: <Database className="w-8 h-8" />,
     title: 'База Данных',
-    description: 'Проектирование и оптимизация баз данных PostgreSQL и MongoDB',
+    description: 'Проектирование и оптимизация баз данных PostgreSQL',
   },
   {
     icon: <GitBranch className="w-8 h-8" />,

@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ExternalLink, Github } from 'lucide-react';
@@ -8,19 +7,25 @@ const projects = [
     title: 'Portal',
     description: 'Корпоративный портал с единой системой аутентификации и управления доступом',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    tech: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
+    tech: ['React', 'Redux/toolkit', 'TypeScript', 'Nest.js', 'PostgreSQL'],
+    link: '#',
+    isNDA: true,
   },
   {
     title: 'ServiceDesk',
     description: 'Система обработки заявок и управления IT-инфраструктурой',
     image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    tech: ['React', 'Redux', 'Nest.js', 'MongoDB'],
+    tech: ['React', 'PHP', 'Bitrix', 'MySQL'],
+    link: '#',
+    isNDA: true,
   },
   {
     title: 'COWid-2021',
     description: 'Игровой проект для поднятия командного духа во время пандемии',
     image: 'https://images.unsplash.com/photo-1556438064-2d7646166914?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    tech: ['React', 'Socket.io', 'Node.js'],
+    tech: ['React', 'TypeScript'],
+    link: 'https://github.com/belirofon/cowid-2021',
+    isNDA: false,
   },
 ];
 
@@ -65,18 +70,18 @@ const Portfolio = () => {
               </div>
               <div className="flex gap-4">
                 <a
-                  href="#"
+                  href={project.isNDA ? '#' : project.link}
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
                 >
                   <ExternalLink size={16} />
-                  Demo
+                  {project.isNDA ? "Под NDA" : "Demo"}
                 </a>
                 <a
-                  href="#"
+                  href={project.isNDA ? '#' : project.link}
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
                 >
                   <Github size={16} />
-                  Code
+                  {project.isNDA ? "Под NDA" : "Code"}
                 </a>
               </div>
             </div>
