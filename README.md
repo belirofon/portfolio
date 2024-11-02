@@ -1,6 +1,6 @@
 # Nikolay Sanikov - Portfolio Landing Page
 
-<a href="https://6724516908b675a79a228999--nickport.netlify.app/">Portfolio<a/>
+<a href="https://nickport.netlify.app">Portfolio<a/>
 ## Project Description
 
 This repository contains a personal landing page for **Nikolay Sanikov**, a full-stack developer. Built with React and Vite, this portfolio website highlights Nikolay's professional background, skills, projects, and contact information. The design and animations enhance user experience, making it both interactive and visually appealing.
