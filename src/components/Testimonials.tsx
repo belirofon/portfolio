@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Star } from 'lucide-react';
@@ -14,7 +13,7 @@ const testimonials = [
   {
     name: 'Елена Соколова',
     position: 'CTO, DataFlow',
-    content: 'Отличное понимание современных технологий и архитектурных решений. Николай успешно реализовал сложный проект по миграции нашей базы данных.',
+    content: 'Отличное понимание современных технологий и архитектурных решений. Николай успешно реализовал сложный проект, связанный с автоматизацией рабочих процессов.',
     rating: 5,
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
   },
