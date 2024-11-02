@@ -36,19 +36,18 @@ const Contact: React.FC = () => {
 
     try {
       await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        process.env.REACT_APP_EMAILJS_SERVICE_ID as string,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID as string,
         {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
-          to_email: 'n.sannikov1988@gmail.com',
+          to_email: process.env.REACT_APP_EMAILJS_NOTIFICATION_EMAIL,
         },
-        'YOUR_PUBLIC_KEY'
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY as string
       );
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setStatus('error');
     }
