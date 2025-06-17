@@ -5,11 +5,27 @@ import { ExternalLink, Github } from 'lucide-react';
 const projects = [
   {
     title: 'Dojo Skins',
-    description: 'Интернет магазин для торговли скинами из steam',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    description: 'Интернет-магазин для торговли скинами из Steam с системой торгов и обмена',
+    image: 'https://images.unsplash.com/photo-1556438064-2d7646166914?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     tech: ['Vue', 'Nuxt', 'TypeScript', 'Nest.js', 'MongoDB'],
-    link: 'skinsdojo.com',
-    isNDA: true,
+    link: 'http://skinsdojo.com/',
+    isNDA: false,
+  },
+  {
+    title: 'Умняшка School',
+    description: 'Образовательная платформа для детей с интерактивными уроками и играми',
+    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    tech: ['React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL'],
+    link: 'https://umnyashka-school.ru/',
+    isNDA: false,
+  },
+  {
+    title: 'Mainu Games',
+    description: 'Игровая платформа с мини-играми и системой достижений',
+    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    tech: ['React', 'TypeScript', 'WebGL', 'Node.js'],
+    link: 'https://test.mainu-games.com/',
+    isNDA: false,
   },
   {
     title: 'Portal',
@@ -30,7 +46,7 @@ const projects = [
   {
     title: 'COWid-2021',
     description: 'Игровой проект для поднятия командного духа во время пандемии',
-    image: 'https://images.unsplash.com/photo-1556438064-2d7646166914?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     tech: ['React', 'TypeScript'],
     link: 'https://github.com/belirofon/cowid-2021',
     isNDA: false,
@@ -53,7 +69,7 @@ const Portfolio = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="bg-gray-800 rounded-xl overflow-hidden group"
+            className="bg-gray-800 rounded-xl overflow-hidden group hover:transform hover:-translate-y-2 transition-all duration-300"
           >
             <div className="relative overflow-hidden">
               <img
@@ -79,17 +95,21 @@ const Portfolio = () => {
               <div className="flex gap-4">
                 <a
                   href={project.isNDA ? '#' : project.link}
+                  target={project.isNDA ? '_self' : '_blank'}
+                  rel={project.isNDA ? '' : 'noopener noreferrer'}
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
                 >
                   <ExternalLink size={16} />
-                  {project.isNDA ? "Под NDA" : "Demo"}
+                  {project.isNDA ? "Под NDA" : "Посмотреть"}
                 </a>
                 <a
-                  href={project.isNDA ? '#' : project.link}
+                  href={project.isNDA ? '#' : (project.title === 'COWid-2021' ? project.link : '#')}
+                  target={project.isNDA || project.title !== 'COWid-2021' ? '_self' : '_blank'}
+                  rel={project.isNDA || project.title !== 'COWid-2021' ? '' : 'noopener noreferrer'}
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
                 >
                   <Github size={16} />
-                  {project.isNDA ? "Под NDA" : "Code"}
+                  {project.isNDA ? "Под NDA" : (project.title === 'COWid-2021' ? "Code" : "Приватный")}
                 </a>
               </div>
             </div>
