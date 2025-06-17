@@ -4,6 +4,14 @@ import { ExternalLink, Github } from 'lucide-react';
 
 const projects = [
   {
+    title: 'Dojo Skins',
+    description: 'Интернет магазин для торговли скинами из steam',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    tech: ['Vue', 'Nuxt', 'TypeScript', 'Nest.js', 'MongoDB'],
+    link: 'skinsdojo.com',
+    isNDA: true,
+  },
+  {
     title: 'Portal',
     description: 'Корпоративный портал с единой системой аутентификации и управления доступом',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
