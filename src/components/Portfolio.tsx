@@ -9,7 +9,7 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1556438064-2d7646166914?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     tech: ['Vue', 'Nuxt', 'TypeScript', 'Nest.js', 'MongoDB'],
     link: 'http://skinsdojo.com/',
-    isNDA: false,
+    isNDA: true,
   },
   {
     title: 'Умняшка School',
@@ -17,7 +17,7 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     tech: ['Vue', 'Nuxt', 'TypeScript', 'Laravel', 'PostgreSQL'],
     link: 'https://umnyashka-school.ru/',
-    isNDA: false,
+    isNDA: true,
   },
   {
     title: 'Mainu Games',
@@ -25,7 +25,7 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     tech: ['Vue', 'Nuxt', 'TypeScript', 'Laravel', 'PostgreSQL'],
     link: 'https://test.mainu-games.com/',
-    isNDA: false,
+    isNDA: true,
   },
   {
     title: 'Portal',
