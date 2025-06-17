@@ -33,17 +33,17 @@ const About = () => {
               <div className="p-4 bg-gray-800 rounded-lg text-center">
                 <Code2 className="w-8 h-8 mx-auto mb-2 text-purple-400" />
                 <h3 className="text-lg font-semibold mb-1">Frontend</h3>
-                <p className="text-sm text-gray-400">React, TypeScript</p>
+                <p className="text-sm text-gray-400">React, Vue, Nuxt</p>
               </div>
               <div className="p-4 bg-gray-800 rounded-lg text-center">
                 <Server className="w-8 h-8 mx-auto mb-2 text-purple-400" />
                 <h3 className="text-lg font-semibold mb-1">Backend</h3>
-                <p className="text-sm text-gray-400">Node.js, Nest.js</p>
+                <p className="text-sm text-gray-400">Node.js, Laravel</p>
               </div>
               <div className="p-4 bg-gray-800 rounded-lg text-center">
                 <Database className="w-8 h-8 mx-auto mb-2 text-purple-400" />
                 <h3 className="text-lg font-semibold mb-1">Database</h3>
-                <p className="text-sm text-gray-400">PostgreSQL, MongoDB</p>
+                <p className="text-sm text-gray-400">PostgreSQL, MySQL</p>
               </div>
             </div>
           </div>
