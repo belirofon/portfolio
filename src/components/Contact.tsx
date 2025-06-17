@@ -118,7 +118,7 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6" netlify>
+          <form onSubmit={handleSubmit} name="contact" className="space-y-6" netlify>
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                 Имя
