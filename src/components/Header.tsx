@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Github, Linkedin, ChevronDown } from 'lucide-react';
 
 const Header = () => {
@@ -26,9 +26,27 @@ const Header = () => {
   ];
 
   const resumeItems = [
-    { title: 'Резюме (English)', href: '/frontend.pdf' },
-    { title: 'Frontend (HH)', href: '/frontend.pdf' },
-    { title: 'Fullstack (HH)', href: '/fullstack.pdf' },
+    { title: 'Резюме (English)', href: '/frontend.pdf', icon: '' },
+    { 
+      title: 'Frontend', 
+      href: '/nick_fullstack.pdf', 
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g mask="url(#a)">
+            <path fill="#FF0002" d="M20 40c11.046 0 20-8.954 20-20S31.046 0 20 0 0 8.954 0 20s8.954 20 20 20Z"></path>
+            <path fill="#fff" d="M29.73 17.05c-.605-.625-1.465-.965-2.515-.965-1.305 0-2.307.53-2.884 1.522v-4.926h-3.026v13.503h3.026v-4.747c0-1.106.227-1.815.567-2.232.331-.416.794-.576 1.296-.576.444 0 .794.141 1.04.397.246.265.388.671.388 1.239v5.91h3.026v-6.506c0-1.107-.322-2.005-.918-2.62ZM16.199 16.085c-1.305 0-2.308.53-2.884 1.522v-4.926h-3.026v13.503h3.026v-4.747c0-1.106.227-1.815.567-2.232.331-.416.794-.576 1.296-.576.444 0 .794.141 1.04.397.246.265.388.671.388 1.239v5.91h3.026v-6.506c0-1.107-.321-2.005-.926-2.629-.596-.624-1.457-.955-2.506-.955Z"></path>
+          </g>
+        </svg>
+      )
+    },
+    { title: 'Fullstack', href: '/fullstack.pdf', icon: (
+      <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g mask="url(#a)">
+          <path fill="#FF0002" d="M20 40c11.046 0 20-8.954 20-20S31.046 0 20 0 0 8.954 0 20s8.954 20 20 20Z"></path>
+          <path fill="#fff" d="M29.73 17.05c-.605-.625-1.465-.965-2.515-.965-1.305 0-2.307.53-2.884 1.522v-4.926h-3.026v13.503h3.026v-4.747c0-1.106.227-1.815.567-2.232.331-.416.794-.576 1.296-.576.444 0 .794.141 1.04.397.246.265.388.671.388 1.239v5.91h3.026v-6.506c0-1.107-.322-2.005-.918-2.62ZM16.199 16.085c-1.305 0-2.308.53-2.884 1.522v-4.926h-3.026v13.503h3.026v-4.747c0-1.106.227-1.815.567-2.232.331-.416.794-.576 1.296-.576.444 0 .794.141 1.04.397.246.265.387.671.387 1.239v5.91h3.026v-6.506c0-1.107-.321-2.005-.926-2.629-.596-.624-1.457-.955-2.506-.955Z"></path>
+        </g>
+      </svg>
+    ) },
   ];
 
   // Close dropdown when clicking outside
@@ -92,10 +110,11 @@ const Header = () => {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
+                        className="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
                         onClick={() => setIsResumeOpen(false)}
                       >
                         {item.title}
+                        {item.icon && item.icon}
                       </a>
                     ))}
                   </div>
@@ -134,7 +153,7 @@ const Header = () => {
                 {item.title}
               </a>
             ))}
-            <div className="pt-2">
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsResumeOpen(!isResumeOpen)}
                 className="flex items-center text-gray-300 hover:text-purple-400 transition-colors duration-300"
@@ -142,24 +161,35 @@ const Header = () => {
                 Резюме <ChevronDown className="ml-1 w-4 h-4" />
               </button>
               {isResumeOpen && (
-                <div className="pl-4 mt-1 space-y-2">
-                  {resumeItems.map((item) => (
-                    <a
-                      key={item.title}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block text-gray-300 hover:text-purple-400 transition-colors duration-300 text-sm"
-                      onClick={() => {
-                        setIsOpen(false);
-                        setIsResumeOpen(false);
-                      }}
-                    >
-                      {item.title}
-                    </a>
-                  ))}
+                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-700">
+                  <div className="py-1">
+                    {resumeItems.map((item) => (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
+                        onClick={() => {
+                          setIsOpen(false);
+                          setIsResumeOpen(false);
+                        }}
+                      >
+                        {item.title}
+                        <span className="ml-2">{item.icon || null}</span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               )}
+            </div>
+            <div className="flex items-center space-x-4">
+              <a href="https://github.com/belirofon" target="_blank" rel="noopener noreferrer">
+                <Github className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors duration-300" />
+              </a>
+              <a href="https://www.linkedin.com/in/nick-sannikov88/" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors duration-300" />
+              </a>
             </div>
           </div>
         </div>
