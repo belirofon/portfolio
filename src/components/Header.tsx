@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, Github, Linkedin, ChevronDown } from 'lucide-react';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +13,9 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const menuItems = [
     { title: 'Обо мне', href: '#about' },
     { title: 'Навыки', href: '#skills' },
@@ -21,6 +24,25 @@ const Header = () => {
     { title: 'Отзывы', href: '#testimonials' },
     { title: 'Контакты', href: '#contact' },
   ];
+
+  const resumeItems = [
+    { title: 'Резюме (English)', href: '/frontend.pdf' },
+    { title: 'Frontend (HH)', href: '/frontend.pdf' },
+    { title: 'Fullstack (HH)', href: '/fullstack.pdf' },
+  ];
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsResumeOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
@@ -54,6 +76,32 @@ const Header = () => {
                 {item.title}
               </a>
             ))}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setIsResumeOpen(!isResumeOpen)}
+                className="flex items-center text-gray-300 hover:text-purple-400 transition-colors duration-300"
+              >
+                Резюме <ChevronDown className="ml-1 w-4 h-4" />
+              </button>
+              {isResumeOpen && (
+                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-700">
+                  <div className="py-1">
+                    {resumeItems.map((item) => (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
+                        onClick={() => setIsResumeOpen(false)}
+                      >
+                        {item.title}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="flex items-center space-x-4">
               <a href="https://github.com/belirofon" target="_blank" rel="noopener noreferrer">
                 <Github className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors duration-300" />
@@ -86,6 +134,33 @@ const Header = () => {
                 {item.title}
               </a>
             ))}
+            <div className="pt-2">
+              <button
+                onClick={() => setIsResumeOpen(!isResumeOpen)}
+                className="flex items-center text-gray-300 hover:text-purple-400 transition-colors duration-300"
+              >
+                Резюме <ChevronDown className="ml-1 w-4 h-4" />
+              </button>
+              {isResumeOpen && (
+                <div className="pl-4 mt-1 space-y-2">
+                  {resumeItems.map((item) => (
+                    <a
+                      key={item.title}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-gray-300 hover:text-purple-400 transition-colors duration-300 text-sm"
+                      onClick={() => {
+                        setIsOpen(false);
+                        setIsResumeOpen(false);
+                      }}
+                    >
+                      {item.title}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </nav>
