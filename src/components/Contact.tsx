@@ -1,19 +1,31 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, MapPin, Github, Linkedin, Send } from 'lucide-react';
-
+import { Mail, MapPin, Github, Linkedin, Send, X } from 'lucide-react';
 
 const Contact: React.FC = () => {
-  // Настроим хук useInView с нужными параметрами
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    
+    // Here you would typically handle the form submission
+    // For example, using fetch or your preferred method
+    
+    // Show success modal
+    setIsModalOpen(true);
+    
+    // Reset form
+    form.reset();
+  };
 
   return (
-    <section id="contact" className="section-container bg-gray-800" ref={ref}>
+    <section id="contact" className="section-container bg-gray-800 relative" ref={ref}>
       <h2 className="section-title gradient-text">Контакты</h2>
       <div className="max-w-4xl mx-auto">
         <motion.div
@@ -73,7 +85,7 @@ const Contact: React.FC = () => {
             data-netlify="true"
             data-netlify-honeypot="bot-field"
             className="space-y-6"
-            action="https://nickport.netlify.app/"
+            onSubmit={handleSubmit}
           >
             <input type="hidden" name="form-name" value="contact" />
             <p hidden>
@@ -135,6 +147,55 @@ const Contact: React.FC = () => {
 
         </motion.div>
       </div>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-gray-800 p-6 rounded-xl max-w-md w-full relative border border-purple-500"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white"
+                aria-label="Close"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg
+                    className="w-10 h-10 text-green-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Сообщение отправлено!</h3>
+                <p className="text-gray-300">Спасибо за ваше сообщение. Я свяжусь с вами в ближайшее время.</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
