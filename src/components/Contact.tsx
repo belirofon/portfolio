@@ -1,18 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Mail, MapPin, Github, Linkedin, Send } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 
-// Определим тип данных формы
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-}
-
-// Определим состояния статуса отправки
-type Status = 'idle' | 'sending' | 'success' | 'error';
 
 const Contact: React.FC = () => {
   // Настроим хук useInView с нужными параметрами
@@ -21,47 +11,6 @@ const Contact: React.FC = () => {
     threshold: 0.1,
   });
 
-  // Настроим состояния для данных формы и статуса отправки
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [status, setStatus] = useState<Status>('idle');
-
-  // Обработчик отправки формы с типизацией для события
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus('sending');
-
-    try {
-      await emailjs.send(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID as string,
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID as string,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          to_email: process.env.REACT_APP_EMAILJS_NOTIFICATION_EMAIL,
-        },
-        process.env.REACT_APP_EMAILJS_PUBLIC_KEY as string
-      );
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      setStatus('error');
-    }
-  };
-
-  // Обработчик изменения полей формы с типизацией для события
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.id]: e.target.value,
-    }));
-  };
 
   return (
     <section id="contact" className="section-container bg-gray-800" ref={ref}>
@@ -118,73 +67,71 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} name="contact" className="space-y-6" netlify>
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            className="space-y-6"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p hidden>
+              <label>
+                Don’t fill this out: <input name="bot-field" />
+              </label>
+            </p>
+
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                 Имя
               </label>
               <input
                 type="text"
+                name="name"
                 id="name"
-                value={formData.name}
-                onChange={handleChange}
                 className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-400 text-white"
                 placeholder="Ваше имя"
                 required
               />
             </div>
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                 Email
               </label>
               <input
                 type="email"
+                name="email"
                 id="email"
-                value={formData.email}
-                onChange={handleChange}
                 className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-400 text-white"
                 placeholder="your@email.com"
                 required
               />
             </div>
+
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
                 Сообщение
               </label>
               <textarea
+                name="message"
                 id="message"
-                value={formData.message}
-                onChange={handleChange}
                 rows={4}
                 className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-400 text-white"
                 placeholder="Ваше сообщение..."
                 required
               />
             </div>
+
             <button
               type="submit"
-              disabled={status === 'sending'}
-              className="w-full bg-purple-600 text-white py-2 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center justify-center space-x-2 disabled:opacity-50"
+              className="w-full bg-purple-600 text-white py-2 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center justify-center space-x-2"
             >
-              {status === 'sending' ? (
-                <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent" />
-                  <span>Отправка...</span>
-                </>
-              ) : (
-                <>
-                  <Send className="w-5 h-5" />
-                  <span>Отправить</span>
-                </>
-              )}
+              <Send className="w-5 h-5" />
+              <span>Отправить</span>
             </button>
-            {status === 'success' && (
-              <p className="text-green-400 text-center">Сообщение успешно отправлено!</p>
-            )}
-            {status === 'error' && (
-              <p className="text-red-400 text-center">Ошибка при отправке. Попробуйте позже.</p>
-            )}
           </form>
+
         </motion.div>
       </div>
     </section>
