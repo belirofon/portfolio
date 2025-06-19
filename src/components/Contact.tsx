@@ -73,7 +73,7 @@ const Contact: React.FC = () => {
             data-netlify="true"
             data-netlify-honeypot="bot-field"
             className="space-y-6"
-            action="/"
+            action="https://nickport.netlify.app/"
           >
             <input type="hidden" name="form-name" value="contact" />
             <p hidden>
