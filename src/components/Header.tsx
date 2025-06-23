@@ -26,27 +26,18 @@ const Header = () => {
   ];
 
   const resumeItems = [
-    { title: 'Резюме (English)', href: '/frontend.pdf', icon: '' },
     { 
-      title: 'Frontend', 
-      href: '/nick_fullstack.pdf', 
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g mask="url(#a)">
-            <path fill="#FF0002" d="M20 40c11.046 0 20-8.954 20-20S31.046 0 20 0 0 8.954 0 20s8.954 20 20 20Z"></path>
-            <path fill="#fff" d="M29.73 17.05c-.605-.625-1.465-.965-2.515-.965-1.305 0-2.307.53-2.884 1.522v-4.926h-3.026v13.503h3.026v-4.747c0-1.106.227-1.815.567-2.232.331-.416.794-.576 1.296-.576.444 0 .794.141 1.04.397.246.265.388.671.388 1.239v5.91h3.026v-6.506c0-1.107-.322-2.005-.918-2.62ZM16.199 16.085c-1.305 0-2.308.53-2.884 1.522v-4.926h-3.026v13.503h3.026v-4.747c0-1.106.227-1.815.567-2.232.331-.416.794-.576 1.296-.576.444 0 .794.141 1.04.397.246.265.388.671.388 1.239v5.91h3.026v-6.506c0-1.107-.321-2.005-.926-2.629-.596-.624-1.457-.955-2.506-.955Z"></path>
-          </g>
-        </svg>
-      )
+      title: 'Frontend Resume', 
+      href: '/frontend.pdf'
     },
-    { title: 'Fullstack', href: '/fullstack.pdf', icon: (
-      <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g mask="url(#a)">
-          <path fill="#FF0002" d="M20 40c11.046 0 20-8.954 20-20S31.046 0 20 0 0 8.954 0 20s8.954 20 20 20Z"></path>
-          <path fill="#fff" d="M29.73 17.05c-.605-.625-1.465-.965-2.515-.965-1.305 0-2.307.53-2.884 1.522v-4.926h-3.026v13.503h3.026v-4.747c0-1.106.227-1.815.567-2.232.331-.416.794-.576 1.296-.576.444 0 .794.141 1.04.397.246.265.388.671.388 1.239v5.91h3.026v-6.506c0-1.107-.322-2.005-.918-2.62ZM16.199 16.085c-1.305 0-2.308.53-2.884 1.522v-4.926h-3.026v13.503h3.026v-4.747c0-1.106.227-1.815.567-2.232.331-.416.794-.576 1.296-.576.444 0 .794.141 1.04.397.246.265.387.671.387 1.239v5.91h3.026v-6.506c0-1.107-.321-2.005-.926-2.629-.596-.624-1.457-.955-2.506-.955Z"></path>
-        </g>
-      </svg>
-    ) },
+    { 
+      title: 'Fullstack Resume', 
+      href: '/fullstack.pdf'
+    },
+    { 
+      title: 'Nick Fullstack', 
+      href: '/nick_fullstack.pdf'
+    },
   ];
 
   // Close dropdown when clicking outside
@@ -62,26 +53,38 @@ const Header = () => {
     };
   }, []);
 
+  const handleResumeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsResumeOpen(!isResumeOpen);
+  };
+
+  const handleResumeItemClick = (href: string) => {
+    window.open(href, '_blank', 'noopener,noreferrer');
+    setIsResumeOpen(false);
+  };
+
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
       isScrolled ? 'bg-opacity-90 backdrop-blur-sm bg-gray-900' : 'bg-transparent'
     }`}>
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <a href="#" className="text-2xl font-bold text-white"> <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 256 256">
-      <defs>
-        <style>
-          {`
-            .bg { fill: #00D8FF; }
-            .text { font-family: Arial, sans-serif; font-weight: bold; font-size: 72px; fill: #ffffff; }
-          `}
-        </style>
-      </defs>
-      <circle className="bg" cx="128" cy="128" r="128" />
-      <text className="text" x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">
-        NS
-      </text>
-    </svg></a>
+          <a href="#" className="text-2xl font-bold text-white"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 256 256">
+              <defs>
+                <style>
+                  {`
+                    .bg { fill: #00D8FF; }
+                    .text { font-family: Arial, sans-serif; font-weight: bold; font-size: 72px; fill: #ffffff; }
+                  `}
+                </style>
+              </defs>
+              <circle className="bg" cx="128" cy="128" r="128" />
+              <text className="text" x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">
+                NS
+              </text>
+            </svg>
+          </a>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
@@ -96,26 +99,22 @@ const Header = () => {
             ))}
             <div className="relative" ref={dropdownRef}>
               <button
-                onClick={() => setIsResumeOpen(!isResumeOpen)}
+                onClick={handleResumeClick}
                 className="flex items-center text-gray-300 hover:text-purple-400 transition-colors duration-300"
               >
                 Резюме <ChevronDown className="ml-1 w-4 h-4" />
               </button>
               {isResumeOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-700">
+                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-700 z-50">
                   <div className="py-1">
                     {resumeItems.map((item) => (
-                      <a
+                      <button
                         key={item.title}
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
-                        onClick={() => setIsResumeOpen(false)}
+                        onClick={() => handleResumeItemClick(item.href)}
+                        className="w-full text-left flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
                       >
                         {item.title}
-                        {item.icon && item.icon}
-                      </a>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -153,37 +152,31 @@ const Header = () => {
                 {item.title}
               </a>
             ))}
-            <div className="relative" ref={dropdownRef}>
+            <div className="relative">
               <button
-                onClick={() => setIsResumeOpen(!isResumeOpen)}
+                onClick={handleResumeClick}
                 className="flex items-center text-gray-300 hover:text-purple-400 transition-colors duration-300"
               >
                 Резюме <ChevronDown className="ml-1 w-4 h-4" />
               </button>
               {isResumeOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-700">
-                  <div className="py-1">
-                    {resumeItems.map((item) => (
-                      <a
-                        key={item.title}
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
-                        onClick={() => {
-                          setIsOpen(false);
-                          setIsResumeOpen(false);
-                        }}
-                      >
-                        {item.title}
-                        <span className="ml-2">{item.icon || null}</span>
-                      </a>
-                    ))}
-                  </div>
+                <div className="mt-2 ml-4 space-y-2">
+                  {resumeItems.map((item) => (
+                    <button
+                      key={item.title}
+                      onClick={() => {
+                        handleResumeItemClick(item.href);
+                        setIsOpen(false);
+                      }}
+                      className="block text-sm text-gray-300 hover:text-purple-400 transition-colors"
+                    >
+                      {item.title}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 pt-4">
               <a href="https://github.com/belirofon" target="_blank" rel="noopener noreferrer">
                 <Github className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors duration-300" />
               </a>
