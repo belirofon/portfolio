@@ -97,7 +97,7 @@ const Header = () => {
                 {item.title}
               </a>
             ))}
-            <div className="relative" ref={dropdownRef}>
+            <div className="relative d-none" ref={dropdownRef}>
               <button
                 onClick={handleResumeClick}
                 className="flex items-center text-gray-300 hover:text-purple-400 transition-colors duration-300"
