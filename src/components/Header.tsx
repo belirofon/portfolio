@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Github, Linkedin, ChevronDown } from 'lucide-react';
+import { Menu, X, Github, FileText, ChevronDown } from 'lucide-react';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,26 +17,17 @@ const Header = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const menuItems = [
-    { title: 'Обо мне', href: '#about' },
-    { title: 'Навыки', href: '#skills' },
-    { title: 'Портфолио', href: '#portfolio' },
-    { title: 'Услуги', href: '#services' },
-    { title: 'Отзывы', href: '#testimonials' },
-    { title: 'Контакты', href: '#contact' },
+    { title: 'About', href: '#about' },
+    { title: 'Stack', href: '#skills' },
+    { title: 'Work', href: '#portfolio' },
+    { title: 'Services', href: '#services' },
+    { title: 'Contact', href: '#contact' },
   ];
 
   const resumeItems = [
-    { 
-      title: 'Frontend Resume', 
-      href: '/frontend.pdf'
-    },
-    { 
-      title: 'Fullstack Resume', 
-      href: '/fullstack.pdf'
-    },
-    { 
-      title: 'Nick Fullstack', 
-      href: '/nick_fullstack.pdf'
+    {
+      title: 'Download CV (EN, PDF)',
+      href: '/cv.pdf'
     },
   ];
 
@@ -102,7 +93,7 @@ const Header = () => {
                 onClick={handleResumeClick}
                 className="flex items-center text-gray-300 hover:text-purple-400 transition-colors duration-300"
               >
-                Резюме <ChevronDown className="ml-1 w-4 h-4" />
+                CV <ChevronDown className="ml-1 w-4 h-4" />
               </button>
               {isResumeOpen && (
                 <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-700 z-50">
@@ -124,8 +115,8 @@ const Header = () => {
               <a href="https://github.com/belirofon" target="_blank" rel="noopener noreferrer">
                 <Github className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors duration-300" />
               </a>
-              <a href="https://www.linkedin.com/in/nick-sannikov88/" target="_blank" rel="noopener noreferrer">
-                <Linkedin className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors duration-300" />
+              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download CV">
+                <FileText className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors duration-300" />
               </a>
             </div>
           </div>
@@ -157,7 +148,7 @@ const Header = () => {
                 onClick={handleResumeClick}
                 className="flex items-center text-gray-300 hover:text-purple-400 transition-colors duration-300"
               >
-                Резюме <ChevronDown className="ml-1 w-4 h-4" />
+                CV <ChevronDown className="ml-1 w-4 h-4" />
               </button>
               {isResumeOpen && (
                 <div className="mt-2 ml-4 space-y-2">
@@ -180,8 +171,8 @@ const Header = () => {
               <a href="https://github.com/belirofon" target="_blank" rel="noopener noreferrer">
                 <Github className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors duration-300" />
               </a>
-              <a href="https://www.linkedin.com/in/nick-sannikov88/" target="_blank" rel="noopener noreferrer">
-                <Linkedin className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors duration-300" />
+              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" aria-label="Download CV">
+                <FileText className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors duration-300" />
               </a>
             </div>
           </div>

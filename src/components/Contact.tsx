@@ -1,32 +1,40 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, MapPin, Github, Linkedin, Send, X } from 'lucide-react';
+import { Mail, Github, Send, X, CalendarClock } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
-    
-    // Here you would typically handle the form submission
-    // For example, using fetch or your preferred method
-    
-    // Show success modal
-    setIsModalOpen(true);
-    
-    // Reset form
-    form.reset();
+    setIsSending(true);
+    try {
+      const data = new FormData(form);
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+      });
+      setIsModalOpen(true);
+      form.reset();
+    } catch {
+      window.location.href =
+        'mailto:n.sann.job@gmail.com?subject=Project inquiry from portfolio site';
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
     <section id="contact" className="section-container bg-gray-800 relative" ref={ref}>
-      <h2 className="section-title gradient-text">Контакты</h2>
+      <h2 className="section-title gradient-text">Contact</h2>
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -35,29 +43,36 @@ const Contact: React.FC = () => {
           className="grid md:grid-cols-2 gap-12"
         >
           <div className="space-y-8">
-            <h3 className="text-2xl font-bold mb-6">Свяжитесь со мной</h3>
+            <h3 className="text-2xl font-bold mb-6">Let&apos;s build something meaningful</h3>
+            <p className="text-gray-400">
+              Open to remote B2B contracts. I reply within 24 hours.
+            </p>
             <div className="space-y-4">
               <a
-                href="mailto:n.sannikov1988@gmail.com"
+                href="mailto:n.sann.job@gmail.com"
                 className="flex items-center space-x-3 text-gray-300 hover:text-purple-400 transition-colors"
               >
                 <Mail className="w-5 h-5" />
-                <span>n.sannikov1988@gmail.com</span>
+                <span>n.sann.job@gmail.com</span>
               </a>
               <a
-                href="https://t.me/nick_sann88"
+                href="https://t.me/nick_sann_job"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center space-x-3 text-gray-300 hover:text-purple-400 transition-colors"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-telegram w-5 h-5">
-                  <path d="M22 2 11 13" />
-                  <path d="M22 2 15 22 11 13 2 9l20-7" />
-                </svg>
-                <span>@nick_sann88</span>
+                <Send className="w-5 h-5" />
+                <span>@nick_sann_job</span>
               </a>
-              <div className="flex items-center space-x-3 text-gray-300">
-                <MapPin className="w-5 h-5" />
-                <span>Россия</span>
-              </div>
+              <a
+                href="https://cal.com/nick-sannikov/15min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 text-gray-300 hover:text-purple-400 transition-colors"
+              >
+                <CalendarClock className="w-5 h-5" />
+                <span>Book a 15-min call</span>
+              </a>
             </div>
             <div className="flex space-x-4">
               <a
@@ -65,16 +80,17 @@ const Contact: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-purple-400 transition-colors"
+                aria-label="GitHub"
               >
                 <Github className="w-6 h-6" />
               </a>
               <a
-                href="https://www.linkedin.com/in/nick-sannikov88/"
+                href="/cv.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-purple-400 transition-colors"
+                className="text-gray-300 hover:text-purple-400 transition-colors text-sm font-medium border border-gray-600 rounded px-3 py-1"
               >
-                <Linkedin className="w-6 h-6" />
+                Download CV
               </a>
             </div>
           </div>
@@ -96,14 +112,14 @@ const Contact: React.FC = () => {
 
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                Имя
+                Name
               </label>
               <input
                 type="text"
                 name="name"
                 id="name"
                 className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-400 text-white"
-                placeholder="Ваше имя"
+                placeholder="Your name"
                 required
               />
             </div>
@@ -124,24 +140,25 @@ const Contact: React.FC = () => {
 
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                Сообщение
+                Message
               </label>
               <textarea
                 name="message"
                 id="message"
                 rows={4}
                 className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-purple-400 text-white"
-                placeholder="Ваше сообщение..."
+                placeholder="What do you want to build?"
                 required
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-purple-600 text-white py-2 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center justify-center space-x-2"
+              disabled={isSending}
+              className="w-full bg-purple-600 text-white py-2 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center justify-center space-x-2 disabled:opacity-50"
             >
               <Send className="w-5 h-5" />
-              <span>Отправить</span>
+              <span>{isSending ? 'Sending...' : 'Send'}</span>
             </button>
           </form>
 
@@ -189,8 +206,8 @@ const Contact: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Сообщение отправлено!</h3>
-                <p className="text-gray-300">Спасибо за ваше сообщение. Я свяжусь с вами в ближайшее время.</p>
+                <h3 className="text-xl font-bold text-white mb-2">Message sent!</h3>
+                <p className="text-gray-300">Thanks for reaching out. I&apos;ll get back to you within 24 hours.</p>
               </div>
             </motion.div>
           </motion.div>

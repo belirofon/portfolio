@@ -22,36 +22,38 @@ const About = () => {
         variants={fadeIn}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="section-title gradient-text">Обо мне</h2>
+        <h2 className="section-title gradient-text">About</h2>
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <p className="text-gray-300 leading-relaxed">
-              Опытный full-stack разработчик с глубоким пониманием современных веб-технологий. 
-              Специализируюсь на создании масштабируемых корпоративных решений и внутренних веб-сервисов.
+              Senior Fullstack Engineer with 6 years of production experience across the
+              Vue, React and Node.js ecosystems. I take features from requirements to
+              production: API design, frontend architecture, CI/CD — and fast onboarding
+              into unfamiliar codebases.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="p-4 bg-gray-800 rounded-lg text-center">
                 <Code2 className="w-8 h-8 mx-auto mb-2 text-purple-400" />
                 <h3 className="text-lg font-semibold mb-1">Frontend</h3>
-                <p className="text-sm text-gray-400">React, Vue, Nuxt</p>
+                <p className="text-sm text-gray-400">Vue 3, React, TypeScript</p>
               </div>
               <div className="p-4 bg-gray-800 rounded-lg text-center">
                 <Server className="w-8 h-8 mx-auto mb-2 text-purple-400" />
                 <h3 className="text-lg font-semibold mb-1">Backend</h3>
-                <p className="text-sm text-gray-400">Node.js, Laravel</p>
+                <p className="text-sm text-gray-400">Node.js, NestJS, Go</p>
               </div>
               <div className="p-4 bg-gray-800 rounded-lg text-center">
                 <Database className="w-8 h-8 mx-auto mb-2 text-purple-400" />
-                <h3 className="text-lg font-semibold mb-1">Database</h3>
-                <p className="text-sm text-gray-400">PostgreSQL, MySQL</p>
+                <h3 className="text-lg font-semibold mb-1">Data & AI</h3>
+                <p className="text-sm text-gray-400">PostgreSQL, LLM integration</p>
               </div>
             </div>
           </div>
           <div className="relative">
             <div className="aspect-square rounded-2xl overflow-hidden">
-              <img 
+              <img
                 src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                alt="Рабочий процесс"
+                alt="Development workflow"
                 className="object-cover w-full h-full"
               />
             </div>

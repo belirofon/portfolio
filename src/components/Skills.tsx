@@ -1,16 +1,23 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-const skills = [
-  { name: 'React', level: 90 },
-  { name: 'Next.js', level: 65 },
-  { name: 'Vue', level: 60 },
-  { name: 'TypeScript', level: 80},
-  { name: 'Node.js', level: 70 },
-  { name: 'Nest.js', level: 70 },
-  { name: 'PostgreSQL', level: 60 },
-  { name: 'MongoDB', level: 50 },
-  { name: 'Docker', level: 75 },
+const groups = [
+  {
+    title: 'Core',
+    items: ['Vue 3', 'React', 'TypeScript', 'Node.js', 'NestJS', 'PostgreSQL', 'Docker'],
+  },
+  {
+    title: 'Proficient',
+    items: ['Next.js', 'Nuxt', 'Pinia / Vuex', 'Redux Toolkit', 'Redis', 'CI/CD', 'Tailwind CSS'],
+  },
+  {
+    title: 'AI-assisted delivery',
+    items: ['OpenRouter', 'Claude Code', 'RAG pipelines', 'Prompt versioning', 'Human-in-the-loop review'],
+  },
+  {
+    title: 'Familiar',
+    items: ['Go', 'MongoDB', 'GraphQL', 'RabbitMQ', 'Playwright / Vitest'],
+  },
 ];
 
 const Skills = () => {
@@ -21,27 +28,24 @@ const Skills = () => {
 
   return (
     <section id="skills" className="section-container bg-gray-800" ref={ref}>
-      <h2 className="section-title gradient-text">Навыки</h2>
+      <h2 className="section-title gradient-text">Stack</h2>
+      <p className="text-center text-gray-400 mb-8">What I ship with — no percentage bars, just honesty.</p>
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        {skills.map((skill, index) => (
+        {groups.map((group, index) => (
           <motion.div
-            key={skill.name}
+            key={group.title}
             initial={{ opacity: 0, x: -20 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="bg-gray-900 p-4 rounded-lg"
+            className="bg-gray-900 p-6 rounded-lg"
           >
-            <div className="flex justify-between mb-2">
-              <span className="text-white font-medium">{skill.name}</span>
-              <span className="text-purple-400">{skill.level}%</span>
-            </div>
-            <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-                transition={{ duration: 1, delay: index * 0.1 }}
-                className="h-full bg-gradient-to-r from-purple-400 to-pink-600"
-              />
+            <h3 className="text-lg font-semibold text-purple-400 mb-4">{group.title}</h3>
+            <div className="flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <span key={item} className="px-3 py-1 text-sm bg-gray-700 rounded-full text-gray-200">
+                  {item}
+                </span>
+              ))}
             </div>
           </motion.div>
         ))}

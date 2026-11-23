@@ -7,7 +7,6 @@ const About = React.lazy(() => import('./components/About'));
 const Skills = React.lazy(() => import('./components/Skills'));
 const Portfolio = React.lazy(() => import('./components/Portfolio'));
 const Services = React.lazy(() => import('./components/Services'));
-const Testimonials = React.lazy(() => import('./components/Testimonials'));
 const Contact = React.lazy(() => import('./components/Contact'));
 
 function App() {
@@ -28,7 +27,6 @@ function App() {
           <Skills />
           <Portfolio />
           <Services />
-          <Testimonials />
           <Contact />
         </Suspense>
       </main>

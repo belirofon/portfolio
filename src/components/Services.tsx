@@ -1,27 +1,25 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Code, GitBranch, Terminal, Database } from 'lucide-react';
+import { Code, Rocket, Bot } from 'lucide-react';
 
 const services = [
   {
     icon: <Code className="w-8 h-8" />,
-    title: 'Веб-разработка',
-    description: 'Создание современных веб-приложений с использованием React/Next.js/Vue и TypeScript',
+    title: 'Vue 2 → Vue 3 migration',
+    description:
+      'Strict TypeScript, Composition API, Pinia. Zero-downtime migration of production apps — currently leading one on a high-load platform.',
   },
   {
-    icon: <Terminal className="w-8 h-8" />,
-    title: 'Backend Разработка',
-    description: 'Разработка серверной части на Node.js и Nest.js',
+    icon: <Rocket className="w-8 h-8" />,
+    title: 'Fullstack MVP in 4–6 weeks',
+    description:
+      'React or Vue frontend, Node.js/NestJS API, PostgreSQL. From requirements to deployed production: architecture, CI/CD, docs included.',
   },
   {
-    icon: <Database className="w-8 h-8" />,
-    title: 'База Данных',
-    description: 'Проектирование и оптимизация баз данных PostgreSQL',
-  },
-  {
-    icon: <GitBranch className="w-8 h-8" />,
-    title: 'Тестовые Задания',
-    description: 'Выполнение тестовых заданий уровня junior в своем стеке технологий',
+    icon: <Bot className="w-8 h-8" />,
+    title: 'AI features that work',
+    description:
+      'LLM integrations with provider abstraction, RAG, structured extraction and human-in-the-loop review. No vibe-coded demos — production-grade AI.',
   },
 ];
 
@@ -33,8 +31,8 @@ const Services = () => {
 
   return (
     <section id="services" className="section-container bg-gray-800" ref={ref}>
-      <h2 className="section-title gradient-text">Услуги</h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <h2 className="section-title gradient-text">Services</h2>
+      <div className="grid md:grid-cols-3 gap-8">
         {services.map((service, index) => (
           <motion.div
             key={service.title}

@@ -4,52 +4,31 @@ import { ExternalLink, Github } from 'lucide-react';
 
 const projects = [
   {
-    title: 'Dojo Skins',
-    description: 'Интернет-магазин для торговли скинами из Steam с системой торгов и обмена',
+    title: 'SkinsDojo — gaming e-commerce',
+    description:
+      'Problem: checkout full of critical bugs, no dynamic filtering. Action: fixed 100+ critical bugs, built dynamic frontend filtering, hardened the NestJS backend. Result: stable checkout shipping to real users.',
     image: 'https://images.unsplash.com/photo-1556438064-2d7646166914?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    tech: ['Vue', 'Nuxt', 'TypeScript', 'Nest.js', 'MongoDB'],
+    tech: ['Vue', 'Nuxt', 'TypeScript', 'Nest.js'],
     link: 'http://skinsdojo.com/',
-    isNDA: true,
+    codeLink: null as string | null,
   },
   {
-    title: 'Умняшка School',
-    description: 'Образовательная платформа для детей с интерактивными уроками и играми',
-    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    tech: ['Vue', 'Nuxt', 'TypeScript', 'Laravel', 'PostgreSQL'],
-    link: 'https://umnyashka-school.ru/',
-    isNDA: true,
+    title: 'AI Writing Workspace',
+    description:
+      'Problem: fiction authors juggle editor, notes and chatbots with no link between them. Action: built a fullstack app — Tiptap editor, world knowledge base, relationship graph, analytics — plus LLM features with provider abstraction, rate limiting and human-in-the-loop approval. Result: working MVP, production-grade LLM integration.',
+    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    tech: ['React', 'Go', 'PostgreSQL', 'OpenRouter'],
+    link: null as string | null,
+    codeLink: 'https://github.com/belirofon/vue2-to-vue3-migration-playbook',
   },
   {
-    title: 'Mainu Games',
-    description: 'Игровая платформа с мини-играми и системой достижений',
-    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    tech: ['Vue', 'Nuxt', 'TypeScript', 'Laravel', 'PostgreSQL'],
-    link: 'https://test.mainu-games.com/',
-    isNDA: true,
-  },
-  {
-    title: 'Portal',
-    description: 'Корпоративный портал с единой системой аутентификации и управления доступом',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    tech: ['React', 'Redux/toolkit', 'TypeScript', 'Nest.js', 'PostgreSQL'],
-    link: '#',
-    isNDA: true,
-  },
-  {
-    title: 'ServiceDesk',
-    description: 'Система обработки заявок и управления IT-инфраструктурой',
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    tech: ['React', 'PHP', 'Bitrix', 'MySQL'],
-    link: '#',
-    isNDA: true,
-  },
-  {
-    title: 'COWid-2021',
-    description: 'Игровой проект для поднятия командного духа во время пандемии',
-    image: 'https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    tech: ['React', 'TypeScript'],
-    link: 'https://github.com/belirofon/cowid-2021',
-    isNDA: false,
+    title: 'Vue 2 → Vue 3 migration playbook',
+    description:
+      'Open-source guide from a real high-load migration: strict TypeScript, Composition API, Pinia — module by module, without stopping production.',
+    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    tech: ['Vue 3', 'TypeScript', 'Pinia', 'Vite'],
+    link: null as string | null,
+    codeLink: 'https://github.com/belirofon/vue2-to-vue3-migration-playbook',
   },
 ];
 
@@ -61,7 +40,8 @@ const Portfolio = () => {
 
   return (
     <section id="portfolio" className="section-container" ref={ref}>
-      <h2 className="section-title gradient-text">Портфолио</h2>
+      <h2 className="section-title gradient-text">Selected work</h2>
+      <p className="text-center text-gray-400 mb-8">Problem → action → result. No NDA wallpaper.</p>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <motion.div
@@ -93,24 +73,28 @@ const Portfolio = () => {
                 ))}
               </div>
               <div className="flex gap-4">
-                <a
-                  href={project.isNDA ? '#' : project.link}
-                  target={project.isNDA ? '_self' : '_blank'}
-                  rel={project.isNDA ? '' : 'noopener noreferrer'}
-                  className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-                >
-                  <ExternalLink size={16} />
-                  {project.isNDA ? "Под NDA" : "Посмотреть"}
-                </a>
-                <a
-                  href={project.isNDA ? '#' : (project.title === 'COWid-2021' ? project.link : '#')}
-                  target={project.isNDA || project.title !== 'COWid-2021' ? '_self' : '_blank'}
-                  rel={project.isNDA || project.title !== 'COWid-2021' ? '' : 'noopener noreferrer'}
-                  className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-                >
-                  <Github size={16} />
-                  {project.isNDA ? "Под NDA" : (project.title === 'COWid-2021' ? "Code" : "Приватный")}
-                </a>
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+                  >
+                    <ExternalLink size={16} />
+                    Live
+                  </a>
+                )}
+                {project.codeLink && (
+                  <a
+                    href={project.codeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+                  >
+                    <Github size={16} />
+                    Code
+                  </a>
+                )}
               </div>
             </div>
           </motion.div>
