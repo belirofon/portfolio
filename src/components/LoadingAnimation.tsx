@@ -22,7 +22,7 @@ const LoadingAnimation = ({ onComplete }: { onComplete: () => void }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Николай Санников
+          Nick Sannikov
         </motion.h1>
         <motion.div
           className="mt-4 flex justify-center space-x-2"
