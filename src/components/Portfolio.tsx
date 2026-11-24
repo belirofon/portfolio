@@ -22,6 +22,15 @@ const projects = [
     codeLink: 'https://github.com/belirofon/vue2-to-vue3-migration-playbook',
   },
   {
+    title: 'League of Predictors — GameFi predictions',
+    description:
+      'Problem: sports-prediction GameFi needed web presence and a Telegram mini app with real-money mechanics. Action: started as fullstack (incl. Flutter tweaks for the TMA), then frontend — website, graphics; backend mentored by the tech lead. Payments via Telegram Stars and crypto, tradable IEO token behind the scenes.',
+    image: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    tech: ['Vue', 'Flutter', 'C# (basic)', 'Telegram Stars', 'Crypto'],
+    link: 'https://lop.cx',
+    codeLink: null as string | null,
+  },
+  {
     title: 'Vue 2 → Vue 3 migration playbook',
     description:
       'Open-source guide from a real high-load migration: strict TypeScript, Composition API, Pinia — module by module, without stopping production.',
